@@ -15,7 +15,20 @@
     # points to btrfs system, with option to point to the nixos subvolume
     { device = "/dev/disk/by-label/btrfs";
       fsType = "btrfs";
-      options = [ "subvol=nixos" ];
+      options = [ "subvol=nixos" "compress=zstd" ];
+    };
+
+
+   fileSystems."/drives/omnus" =
+    { device = "/dev/disk/by-label/omnus";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "nofail" ];
+    };
+
+   fileSystems."/drives/lib" =
+    { device = "/dev/disk/by-label/library+vms";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "nofail" ];
     };
 
   # points to luks partition, which contains btrfs system
