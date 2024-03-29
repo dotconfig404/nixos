@@ -25,7 +25,7 @@
       options = [ "compress=zstd" "nofail" ];
     };
 
-   fileSystems."/drives/lib" =
+   fileSystems."/drives/library+vms" =
     { device = "/dev/disk/by-label/library+vms";
       fsType = "btrfs";
       options = [ "compress=zstd" "nofail" ];
