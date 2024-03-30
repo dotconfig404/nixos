@@ -1,15 +1,16 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ ./configuration.nix ];
+    #[ (modulesPath + "/installer/scan/not-detected.nix") ./configuration.nix 
+    #];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ "amdgpu" ];
 # kvm for virtualisation?
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
+  hardware.enableRedistributableFirmware = lib.mkDefault true;
 
     fileSystems."/" =
     # points to btrfs system, with option to point to the nixos subvolume

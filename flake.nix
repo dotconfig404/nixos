@@ -3,16 +3,30 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    home-manager.url = "github:nix-community/home-manager/release-23.11";
   };
 
-  outputs = { self, nixpkgs }@inputs:
-    {
-      nixosConfigurations = {
- 	# "if there is a system with hostname noxy, use following config"
-        noxy = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [ ./noxy.nix ./configuration.nix ];
+  outputs = { self, home-manager, nixpkgs }@inputs:
+  let
+    system = "x86_64-linux";
+    specialArgs = inputs // { inherit system; };
+    shared-modules = [
+      home-manager.nixosModules.home-manager
+      {
+        home-manager = {
+          useUserPackages = true;
+          extraSpecialArgs = specialArgs;
         };
+      }
+    ];
+  in {
+    nixosConfigurations = {
+      # "if there is a system with hostname noxy, use following config"
+      noxy = nixpkgs.lib.nixosSystem {
+        specialArgs = specialArgs;
+        system = system;
+        modules = shared-modules ++ [ ./noxy.nix ];
       };
     };
+  };
 }
