@@ -104,7 +104,7 @@ set nocompatible
 " needed to disable vi compability and enable vim features
 " and used as a system-wide vimrc. in user vimrc not needed.
 
-set visualbell
+"set visualbell
 " stop annoying bell sound
 
 set scrolloff=5
