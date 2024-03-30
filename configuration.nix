@@ -14,8 +14,20 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
-     vim 
      wget
+     cowsay
+     rsync
+    ((vim_configurable.override {  }).customize{
+      name = "vim";
+      # Install plugins for example for syntax highlighting of nix files
+      vimrcConfig.packages.myplugins = with pkgs.vimPlugins; {
+        start = [ Vundle-vim ];
+        opt = [];
+      };
+      vimrcConfig.customRC = ''
+        so /etc/nixos/dotfiles/.vimrc
+      '';
+    })
    ];
 
   # windwow manager
@@ -63,7 +75,13 @@
         userName = "dotconfig";
         userEmail = "dotconfig@krutt.org";
       };
+    programs.neovim  = {
+      enable = true;
+    };
+
+
       home.stateVersion = "23.11";
+
     };
   };
 
