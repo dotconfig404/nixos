@@ -34,8 +34,9 @@
   # windwow manager
   services.xserver.enable = true;
   services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-   #services.desktopManager.plasma6.enable
+  #services.xserver.desktopManager.plasma5.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.xserver.displayManager.sddm.wayland.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "eu";
@@ -101,7 +102,6 @@
    virtualisation.virtualbox.host.enable = true;
    users.extraGroups.vboxusers.members = [ "dotconfig" ];
    virtualisation.virtualbox.guest.enable = true;
-   virtualisation.virtualbox.guest.x11 = true;
   
   home-manager = {
     users.dotconfig = {
