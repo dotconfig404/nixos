@@ -8,3 +8,4 @@
 5) add an import for configuration.nix from hostname.nix
 6) add entry to flake.nix for hostname.nix
 7) sudo nixos-rebuild switch
+8) nix flake update (or before?)
