@@ -14,9 +14,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
    environment.systemPackages = with pkgs; [
+     ntfs3g
+     lsof
+       tree
+       kitty
      wget
      cowsay
+     gparted
      rsync
+     woeusb-ng
     ((vim_configurable.override {  }).customize{
       name = "vim";
       # since my vimrc is fairly simple, we'll just source it like this
@@ -40,7 +46,7 @@
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "eu";
-  #services.xserver.xkb.options = "caps:escape";
+  services.xserver.xkb.options = "caps:escape";
 
   # Enable sound.
   sound.enable = true;
@@ -52,8 +58,6 @@
      extraGroups = [ "wheel" "networkmanager" ]; 
      packages = with pkgs; [
        firefox
-       tree
-       kitty
      ];
    };
    # source the tmux file
@@ -103,23 +107,40 @@
    users.extraGroups.vboxusers.members = [ "dotconfig" ];
    virtualisation.virtualbox.guest.enable = true;
   
+
+   environment.sessionVariables = rec {
+    EDITOR = "vim";
+   };
+
   home-manager = {
     users.dotconfig = {
+     
       programs.git = {
         enable = true;
-        userName = "dotconfig";
+        userName = "dotconfigaaaa";
         userEmail = "dotconfig@krutt.org";
       };
-       services.xcape = {
+     
+
+     
+      services.xcape = {
          enable = true;
          mapExpression = {
            Alt_R = "Escape";
          };
        };
+      
+      # Let Home Manager install and manage itself.
+      programs.home-manager.enable = true;
+
       home.stateVersion = "23.11";
     };
   };
-
+  # why the fuck is this not working a?????
+      programs.bash.shellAliases = {
+        conf = "$EDITOR /etc/nixos/configuration.nix";
+        reb = "sudo nixos-rebuild switch";
+      };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

@@ -63,7 +63,6 @@ autocmd FileType html inoremap ;i <em></em><Space><++><Esc>FeT>i
 
 hi CursorLine   cterm=NONE ctermbg=brown ctermfg=lightgray guibg=brown guifg=white
 
-colorscheme torte
 
 ""#########################################################
 ""########	general ########################################
@@ -418,6 +417,9 @@ let g:syntastic_sol_checkers = ['solc', 'solium']
 
 call vundle#end()
 filetype plugin indent on
+
+" if using a colorscheme from the plugin, this needs to go in the end
+colorscheme kalahari
 
 " using single click for opening files etc in nerdtree
 let NERDTreeMouseMode=3
