@@ -27,6 +27,11 @@
         system = system;
         modules = shared-modules ++ [ ./noxy.nix ];
       };
+      titania = nixpkgs.lib.nixosSystem {
+        specialArgs = specialArgs;
+        system = system;
+        modules = shared-modules ++ [ ./titania.nix ];
+      };
     };
   };
 }
