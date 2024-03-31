@@ -116,7 +116,7 @@
      
       programs.git = {
         enable = true;
-        userName = "dotconfigaaaa";
+        userName = "dotconfig";
         userEmail = "dotconfig@krutt.org";
       };
      
